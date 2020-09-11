@@ -113,6 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future<void> _getToken() async{
+    try{
+      var token = await FirebaseMessaging().getToken();
+      print(token);
+    }catch(error){
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -158,10 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()async{
-         String token = await _firebaseMessaging.getToken();
-         print(token);
-        },
+        onPressed: _getToken,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
